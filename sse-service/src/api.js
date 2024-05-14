@@ -36,10 +36,10 @@ app.get('/sse-notifications-s2', (request, response, _next) => {
 
   const { userId } = request.query
 
-  registerClient(userId, response)
+  const { newClient } = registerClient(userId, response)
 
   response.on("close", () => {
-    removeClient(userId)
+    removeClient(newClient.clientId)
     response.end();
   });
 })

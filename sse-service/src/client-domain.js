@@ -1,15 +1,20 @@
 
 let CLIENTS_REGISTERED = []
 export function registerClient(userId, response) {
-  CLIENTS_REGISTERED.push({
-    userId, response
-  })
+  const newClient = {
+    userId,
+    response,
+    clientId: crypto.randomUUID()
+  }
+  CLIENTS_REGISTERED.push(newClient)
   console.log('CLIENTES REGISTRADOS', CLIENTS_REGISTERED)
+
+  return { newClient }
 }
 
 
-export function removeClient(userId) {
-  const updatedList = CLIENTS_REGISTERED.filter(item => item.userId !== userId)
+export function removeClient(clientId) {
+  const updatedList = CLIENTS_REGISTERED.filter(item => item.clientId !== clientId)
   CLIENTS_REGISTERED = updatedList
   console.log('CLIENTES ATUALIZADOS', CLIENTS_REGISTERED)
 }
