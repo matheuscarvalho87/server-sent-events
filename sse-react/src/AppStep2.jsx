@@ -8,7 +8,6 @@ function AppStep2() {
     const subscription = new EventSource("http://localhost:3000/sse-notifications-s2?userId=12345");
     
     subscription.onmessage = (event) => {
-      console.log('RECEBEU EVENT',event)
       const parsedData = JSON.parse(event.data);
       setNotification(oldNotifications => [...oldNotifications, parsedData])
     };
